@@ -54,5 +54,7 @@
 @media screen and (max-width: 480px) {
   .root {
     flex-direction: column;
+    gap: 0.5rem;
+    border-bottom: 1px solid grey;
   }
 }
