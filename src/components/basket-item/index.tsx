@@ -51,7 +51,3 @@ const BasketItem: FC<Props> = ({ product }) => {
 };
 
 export default BasketItem;
-
-//кнопки удаления и изменения количества.
-//страница продукта.
-//стилизация
