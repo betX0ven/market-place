@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  gap: 1rem;
+}
+.products {
+  width: 70%;
+}
+.info {
+  width: 30%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.products,
+.info {
+  background: white;
+  padding: 1rem;
+  border-radius: 2rem;
+}
+.info-item {
+  display: flex;
+  justify-content: space-between;
+}
+.quantity,
+.discount {
+  color: grey;
+}
+.order {
+  background: #a73afd;
+  padding: 0.8rem 1rem;
+  border-radius: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+}

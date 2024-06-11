@@ -1,0 +1,70 @@
+Подключение Google OAuth аутентификации к Supabase можно осуществить, следуя этим шагам:
+
+Шаг 1: Создайте проект в Google Cloud
+Зайдите в Google Cloud Console: Google Cloud Console.
+Создайте новый проект:
+В верхнем левом углу нажмите на "Select a project" и затем "New Project".
+Укажите имя проекта и выберите организацию (если необходимо), затем нажмите "Create".
+
+Шаг 2: Настройте OAuth 2.0
+Перейдите в секцию "APIs & Services":
+В меню слева выберите "APIs & Services" -> "Credentials".
+Создайте OAuth 2.0 Client ID:
+Нажмите "Create Credentials" -> "OAuth 2.0 Client ID".
+Вам будет предложено настроить экран согласия (Consent Screen). Заполните необходимые поля (имя приложения, поддержка, и т.д.).
+Выберите "Application type" как "Web application".
+Укажите название и добавьте URI для перенаправления (Redirect URI). URI для перенаправления будет выглядеть примерно так: https://<your-supabase-project>.supabase.co/auth/v1/callback.
+Сохраните изменения. Вы получите Client ID и Client Secret.
+
+Шаг 3: Настройте Google OAuth в Supabase
+Зайдите в Supabase Dashboard: Supabase Dashboard.
+Выберите ваш проект.
+Перейдите в секцию "Authentication":
+В левом меню выберите "Authentication".
+Перейдите во вкладку "Providers".
+Найдите и включите Google как провайдера аутентификации.
+Введите Client ID и Client Secret:
+Вставьте значения Client ID и Client Secret, которые вы получили от Google.
+Сохраните настройки.
+
+Шаг 4: Настройте разрешения на Google Cloud
+Добавьте разрешения для вашего домена:
+Вернитесь в Google Cloud Console.
+Перейдите в "OAuth consent screen".
+Добавьте ваш домен в секцию "Authorized domains".
+Убедитесь, что домен вашего проекта Supabase добавлен и верифицирован.
+Шаг 5: Используйте Google OAuth в вашем приложении
+Теперь, когда Google OAuth настроен, вы можете добавить функциональность аутентификации в ваше приложение. Пример использования в Next.js:
+
+tsx:
+
+import { useEffect } from 'react';
+import { supabase } from '../lib/supabaseClient';
+
+export default function Auth() {
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN') {
+        console.log('User signed in:', session);
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const signInWithGoogle = async () => {
+    const { user, session, error } = await supabase.auth.signIn({
+      provider: 'google',
+    });
+    if (error) console.error('Error signing in:', error);
+    else console.log('Signed in:', user, session);
+  };
+
+  return (
+    <div>
+      <button onClick={signInWithGoogle}>Sign in with Google</button>
+    </div>
+  );
+}

@@ -1,0 +1,52 @@
+.buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-grow: 1;
+  & button {
+    color: black;
+    background: #f1f1f5;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+}
+.root {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  padding: 2rem;
+  &:hover {
+    .remove {
+      opacity: 1;
+    }
+  }
+}
+.info {
+  width: min(400px, 100%);
+}
+.remove {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  color: black;
+  background: #f1f1f5;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  right: 2rem;
+  bottom: 2rem;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+  transition-property: opacity;
+}
+.thumbnail {
+  width: 150px;
+  height: 150px;
+}
