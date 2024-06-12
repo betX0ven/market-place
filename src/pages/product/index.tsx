@@ -1,15 +1,12 @@
 import { ComponentProps, FC, HTMLAttributes } from "react";
 import css from "./style.module.css";
-import { Product } from "../../types/product";
+import { useLoaderData } from "react-router-dom";
+import { LoaderData } from "./loader";
 
-interface Props extends ComponentProps<FC>, HTMLAttributes<HTMLDivElement> {
-  product: Product;
-  description: string;
-  price: number;
-  thumbnail: string;
-}
+interface Props extends ComponentProps<FC>, HTMLAttributes<HTMLDivElement> {}
 
-const PageProduct: FC<Props> = (product) => {
+const PageProduct: FC<Props> = () => {
+  const { product } = useLoaderData() as LoaderData;
   return (
     <main className={css.root}>
       <img src={product.thumbnail} alt="product" />
